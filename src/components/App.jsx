@@ -29,7 +29,7 @@ export const App = () => {
   
   !normalizedList.includes(normalizedContact)  
     ? setContacts([...contacts, data])
-    : Notify.info(` Eeep, ${data.name} is already a contact.`)
+    : Notify.info(` Eeep, ${data.name} is already a contact. Please use a unique name.`)
   };
 
 // get filter value  
@@ -46,13 +46,13 @@ export const App = () => {
     );
     
     if (normalizedFilter !== "" && search.length === 0) {
-      Notify.info("Eeep, sorry, that search is not found");
+      Notify.info("Sorry, search does not match any contact in the list");
     };
 
     return search;
   };
     
-// look through contacts by id and deletes it
+// look through contacts by id and returns contacts that do not match the id of the target
   const handleRemove = (id) => {
     setContacts(prevContacts =>
       prevContacts.filter(contact => contact.id !== id)
