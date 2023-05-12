@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
 import { useState } from "react"
 import { nanoid } from 'nanoid';
-
+import Notiflix, { Notify } from 'notiflix';
 
 /* styled components*/
 import { SVG } from 'components/Icons/Icons'; 
@@ -20,7 +20,13 @@ export const ContactForm = ({ onAdd }) => {
     // click event handlers input changes and for submit
     const handleChangeName = e => {
         const newName = e.target.value
-        setName(newName);
+        const validName = isNameValid(newName);
+        console.log(validName)
+        if(validName === true){
+            setName(newName)
+        } else if (validName === false) {
+            Notify.warning("the character you are typing is not accepted please ")
+        }
     };
 
     const handleChangeTel = e => {
@@ -42,6 +48,17 @@ export const ContactForm = ({ onAdd }) => {
         setName('');
         setNumber('')
     };
+
+    const isNameValid = (name) => {
+    const re = /^[A-Za-z]( ?[A-Za-z] ?)*$/;
+    return re.test(name);
+    };
+    
+    // const isNumberValid = (number) => {
+    // const re = /^(\(?\+?[0-9]*\)?)?[0-9_\- \(\)]*$/;
+    //    const re2 = /^(\(?\+?[0-9]*\)?)?[0-9_\- \(\)]*$/
+    // return re.test(number);
+    // };
 
     return (
         
@@ -78,7 +95,7 @@ export const ContactForm = ({ onAdd }) => {
                 </label>
                 <label id="tel">
                     <StyledInput
-                        type="number"
+                        type="tel"
                         name="number"
                         pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
                         title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
