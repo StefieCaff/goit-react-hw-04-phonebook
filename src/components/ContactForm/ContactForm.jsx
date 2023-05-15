@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
 import { useState } from "react"
 import { nanoid } from 'nanoid';
-import Notiflix, { Notify } from 'notiflix';
+//import { Notify } from 'notiflix';
 
 /* styled components*/
 import { SVG } from 'components/Icons/Icons'; 
@@ -9,52 +9,57 @@ import { StyledButton } from 'components/Button/s-button.js';
 import { StyledForm, StyledInput } from './s-contact-form';
 import { StyledFlexColumn, StyledFlex } from 'components/styled-common';
 import { StyledTitle } from 'components/styled-common';
+import { Notify } from 'notiflix';
 
 
 
 export const ContactForm = ({ onAdd }) => {
-    //set states for form reset and to capture input values    
-    const [name, setName] = useState('');
-    const [number, setNumber] = useState('');
+    const [contactData, setContactData] = useState({ contactName: '', contactTel: '' });
 
     // click event handlers input changes and for submit
-    const handleChangeName = e => {
-        const newName = e.target.value
-        const validName = isNameValid(newName);
-        console.log(validName)
-        if(validName === true){
-            setName(newName)
-        } else if (validName === false) {
-            Notify.warning("the character you are typing is not accepted please ")
-        }
+    const handleChangeInput = e => {
+        const { name, value } = e.target;
+        setContactData(prev => {
+            return { ...prev, [name]: value,}
+        })
     };
-
-    const handleChangeTel = e => {
-        const newNum = e.target.value
-        setNumber(newNum);
-    };
+    // const handleChangeName = e => {
+    //     const newName = e.target.value
+    //     const validName = isNameValid(newName);
+    //     console.log(newName.length)
+    //     if(validName === true){
+    //         setName(newName)
+    //     } else if (validName === false || newName.length !== 0) {
+    //         setName('')
+    //         //Notify.warning("Name must contain minimum 1, maximum 30 characters. In this case characters include Upper and lowercase letters, apostrophe with following letter, and a max of two spaces between characters.")
+    //     }
+    // };
+    
+    // const handleChangeTel = e => {
+    //     const newTel = e.target.value
+    //     setTel(newTel);
+    // };
      
     const handleSubmit = (e) => {
         e.preventDefault();
-        
-        const data = ({ id: nanoid(6), name: name, number: number });
-        onAdd(data)
+        const data = ({ id: nanoid(6), name: contactData.contactName, number: contactData.contactTel });
+        onAdd(data);
+        Notify.success(`Got it, ${contactData.contactName} has been added to your phone book.`)
         formReset();
     }
 
  
 // helper functions  
     const formReset = () => {
-        setName('');
-        setNumber('')
+        setContactData({ contactName: '', contactTel: '' })
     };
 
-    const isNameValid = (name) => {
-    const re = /^[A-Za-z]( ?[A-Za-z] ?)*$/;
-    return re.test(name);
-    };
+    // const isNameValid = (name) => {
+    // const re = /^[a-zA-Zа-яА-Я]+( ?([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$/;
+    // return re.test(name);
+    // };
     
-    // const isNumberValid = (number) => {
+    // const isTelValid = (number) => {
     // const re = /^(\(?\+?[0-9]*\)?)?[0-9_\- \(\)]*$/;
     //    const re2 = /^(\(?\+?[0-9]*\)?)?[0-9_\- \(\)]*$/
     // return re.test(number);
@@ -65,59 +70,48 @@ export const ContactForm = ({ onAdd }) => {
         <StyledFlexColumn>
             <StyledTitle>Add a contact</StyledTitle>
             <StyledFlex>
-            <StyledForm onSubmit={handleSubmit}>
-                <StyledButton
-                    style={{padding:5}}
-                    type="submit"
-                    onClick={(e) => {handleSubmit(e)}}
-                >
-                    <SVG
-                        width="25"
-                        height="25"
-                        name="add"
-                    />
+                <StyledForm onSubmit={handleSubmit}>
+                    
+                    <StyledButton
+                        style={{padding:5}}
+                        type="submit"
+                        aria-label="add a contact"
+                    >
+                        <SVG
+                            width="25"
+                            height="25"
+                            name="add"
+                        />
                     </StyledButton>
                     <StyledFlex> 
-                        <label id="name">
-                       
-                    <StyledInput
-                        type="text"
-                        name="name"
-                        pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
-                        title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan."
-                        placeholder="contact name"
-                        required
-                        autoFocus={true}
-                        onChange={handleChangeName}
-                        value={name} 
-                        maxLength="30"
-                        />
-                </label>
-                <label id="tel">
-                    <StyledInput
-                        type="tel"
-                        name="number"
-                        pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
-                        title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
-                        required
-                        placeholder="contact phone"
-                        onChange={handleChangeTel}
-                        value={number}
-                        maxLength="19"
-                    />
-                    </label>
-                </StyledFlex>
-                {/* <StyledButton
-                    style={{padding:5}}
-                    type="submit"
-                    onClick={(e) => {handleSubmit(e)}}
-                >
-                    <SVG
-                        width="20"
-                        height="20"
-                        name="add"
-                    />
-                 </StyledButton> */}
+                        <label id="name">   
+                            <StyledInput
+                               type="text"
+                                name="contactName"
+                                pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
+                                title="Name must contain minimum 1, maximum 30 characters. In this case characters include Upper and lowercase letters, apostrophe with following letter, and a max of two spaces between characters. For example: Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
+                                placeholder="contact name"
+                                required
+                                autoFocus={true}
+                                onChange={handleChangeInput}
+                                value={contactData.contactName} 
+                                maxLength="30"
+                            />
+                        </label>
+                        <label id="tel">
+                            <StyledInput
+                                type="tel"
+                                name="contactTel"
+                                pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
+                                title="Phone number must be at least 6 digits max 19 digits. In this case digits include single spaces between numbers, dashes, parentheses and can start with +"
+                                required
+                                placeholder="contact phone"
+                                onChange={handleChangeInput}
+                                value={contactData.contactTel}
+                                maxLength="19"
+                            />
+                        </label>
+                    </StyledFlex>
                 </StyledForm>
             </StyledFlex>
         </StyledFlexColumn>

@@ -1,4 +1,14 @@
 import styled from "styled-components";
+import Notiflix from "notiflix";
+
+Notiflix.Notify.init({
+    position: 'center-top',
+    pauseOnHover: true,
+    cssAnimationDuration: 300,
+    fontSize: '15px',
+    showOnlyTheLastOne: true,
+    messageMaxLength: 300
+})
 
 const StyledFlexColumn = styled.div`
     display: flex;
@@ -52,9 +62,6 @@ const StyledContainer = styled.div`
 const StyledSection = styled.section`
     padding-top: .5px;
     padding-bottom: .5px;
-}
-
-
 `;
 
 export {
@@ -65,3 +72,4 @@ export {
     StyledContainer,
     StyledSection
 } 
+
