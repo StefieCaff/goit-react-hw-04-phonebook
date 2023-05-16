@@ -19,26 +19,13 @@ export const ContactForm = ({ onAdd }) => {
     // click event handlers input changes and for submit
     const handleChangeInput = e => {
         const { name, value } = e.target;
+       
+      
         setContactData(prev => {
             return { ...prev, [name]: value,}
         })
     };
-    // const handleChangeName = e => {
-    //     const newName = e.target.value
-    //     const validName = isNameValid(newName);
-    //     console.log(newName.length)
-    //     if(validName === true){
-    //         setName(newName)
-    //     } else if (validName === false || newName.length !== 0) {
-    //         setName('')
-    //         //Notify.warning("Name must contain minimum 1, maximum 30 characters. In this case characters include Upper and lowercase letters, apostrophe with following letter, and a max of two spaces between characters.")
-    //     }
-    // };
-    
-    // const handleChangeTel = e => {
-    //     const newTel = e.target.value
-    //     setTel(newTel);
-    // };
+
      
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -54,16 +41,16 @@ export const ContactForm = ({ onAdd }) => {
         setContactData({ contactName: '', contactTel: '' })
     };
 
-    // const isNameValid = (name) => {
-    // const re = /^[a-zA-Zа-яА-Я]+( ?([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$/;
-    // return re.test(name);
-    // };
+    const isNameValid = (name) => {
+    const re = /^[a-zA-Zа-яА-Я]+( ?([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$/;
+    return re.test(name);
+    };
     
-    // const isTelValid = (number) => {
-    // const re = /^(\(?\+?[0-9]*\)?)?[0-9_\- \(\)]*$/;
-    //    const re2 = /^(\(?\+?[0-9]*\)?)?[0-9_\- \(\)]*$/
-    // return re.test(number);
-    // };
+    const isTelValid = (number) => {
+    const re = /\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}/;
+       
+    return re.test(number);
+    };
 
     return (
         
