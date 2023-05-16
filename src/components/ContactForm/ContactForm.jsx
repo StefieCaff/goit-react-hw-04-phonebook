@@ -20,13 +20,12 @@ export const ContactForm = ({ onAdd }) => {
     const handleChangeInput = e => {
         const { name, value } = e.target;
        
-      
+
         setContactData(prev => {
             return { ...prev, [name]: value,}
         })
     };
 
-     
     const handleSubmit = (e) => {
         e.preventDefault();
         const data = ({ id: nanoid(6), name: contactData.contactName, number: contactData.contactTel });
@@ -34,23 +33,22 @@ export const ContactForm = ({ onAdd }) => {
         Notify.success(`Got it, ${contactData.contactName} has been added to your phone book.`)
         formReset();
     }
-
- 
+    
 // helper functions  
     const formReset = () => {
         setContactData({ contactName: '', contactTel: '' })
     };
 
-    const isNameValid = (name) => {
-    const re = /^[a-zA-Zа-яА-Я]+( ?([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$/;
-    return re.test(name);
-    };
+    // const isNameValid = (name) => {
+    // const re = /^[a-zA-Zа-яА-Я]+( ?([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$/;
+    // return re.test(name);
+    // };
     
-    const isTelValid = (number) => {
-    const re = /\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}/;
+    // const isTelValid = (number) => {
+    // const re = /\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}/;
        
-    return re.test(number);
-    };
+    // return re.test(number);
+    // };
 
     return (
         

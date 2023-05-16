@@ -13,11 +13,11 @@ const Filter = (props) => {
 
     return (
         <StyledFlexColumn>
-            <StyledTitle>Search contacts { value }</StyledTitle>
+            <StyledTitle>Search contacts for: { value }</StyledTitle>
             <StyledFilter
                 type="text"
                 value={value}
-                placeholder="search by name"
+                placeholder="search by name or number"
                 onChange={onFilter}
             />
         </StyledFlexColumn>

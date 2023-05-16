@@ -40,16 +40,27 @@ export const App = () => {
 // normalize filter and look for matching name in contacts  
   const searchContact = () => {
     const normalizedFilter = filter.toLowerCase();
-
     const searchName = contacts.filter(contact =>
       contact.name.toLowerCase().includes(normalizedFilter)
     );
+    const searchTel = contacts.filter(contact =>
+      contact.number.includes(normalizedFilter)
+    );
     
-    if (normalizedFilter !== "" && searchName.length === 0) {
-      Notify.failure("Hmm, the input does not match any contact in the phone book");
+    console.log(searchTel, 'tel');
+    console.log(searchName, 'name');
+    if (searchName.length >= 1) {
+      if (normalizedFilter !== "" && searchName.length === 0) {
+        Notify.failure("Hmm, that name does not match any contact in the phone book");
+      }
+      return searchName;
     };
-
-    return searchName;
+    if (searchTel){
+      if (normalizedFilter !== "" && searchTel.length === 0) {
+        Notify.failure("Hmm, that number does not match any contact in the phone book");
+      }
+      return searchTel;
+    };
   };
     
 /* look through contacts by id  
