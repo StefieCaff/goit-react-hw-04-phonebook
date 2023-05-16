@@ -1,9 +1,9 @@
-
+/* Libraries */
 import { useState } from "react";
+import { Notify } from 'notiflix';
+/* Local JS*/
 import { useLocalStorage } from "./LocalStorage/local-storage.js";
-import { Notify } from 'notiflix/build/notiflix-notify-aio';
-
-
+/* Components */ 
 import { ContactForm } from './ContactForm/ContactForm.jsx'
 import { ContactList } from './ContactList/ContactList.jsx'
 import { Filter } from './Filter/Filter.jsx'
@@ -41,18 +41,20 @@ export const App = () => {
   const searchContact = () => {
     const normalizedFilter = filter.toLowerCase();
 
-    const search = contacts.filter(contact =>
+    const searchName = contacts.filter(contact =>
       contact.name.toLowerCase().includes(normalizedFilter)
     );
     
-    if (normalizedFilter !== "" && search.length === 0) {
-      Notify.info("Sorry, search does not match any contact in the list");
+    if (normalizedFilter !== "" && searchName.length === 0) {
+      Notify.failure("Hmm, the input does not match any contact in the phone book");
     };
 
-    return search;
+    return searchName;
   };
     
-// look through contacts by id and returns contacts that do not match the id of the target
+/* look through contacts by id  
+render contacts that do not match the id of the target 
+removing contacts that match id */
   const handleRemove = (id) => {
     setContacts(prevContacts =>
       prevContacts.filter(contact => contact.id !== id)

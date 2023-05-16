@@ -1,4 +1,4 @@
-import PropTypes from 'prop-types'
+import { string, func } from 'prop-types'
 
 import { StyledFilter } from './s-filter';
 import { StyledTitle } from 'components/styled-common';
@@ -25,8 +25,8 @@ const Filter = (props) => {
 };
 
 Filter.propTypes = {
-    value: PropTypes.string.isRequired,
-    onFilter: PropTypes.func.isRequired
+    value: string.isRequired,
+    onFilter: func.isRequired
 }
 
 export {Filter}

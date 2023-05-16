@@ -1,4 +1,4 @@
-import PropTypes from 'prop-types';
+import { string } from 'prop-types';
 import sprite from '../../images/icons.svg';
 import { StyledFlex } from 'components/styled-common';
 import { StyledSVG } from './s-icons-styled';
@@ -26,7 +26,7 @@ SVG.defaultProps = {
 }
 
 SVG.propTypes = {
-    width: PropTypes.string,
-    height: PropTypes.string,
-    name: PropTypes.string
+    width: string,
+    height: string,
+    name: string
 }

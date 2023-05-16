@@ -1,4 +1,4 @@
-import PropTypes from 'prop-types';
+import { node, string, array, func, }from 'prop-types';
 
 import { SVG } from '../Icons/Icons.jsx';
 import { StyledButton } from 'components/Button/s-button.js';
@@ -66,12 +66,12 @@ const Callto = ({ phone, children }) => {
 };
 
 ContactList.propTypes = {
-    contacts: PropTypes.array.isRequired,
-    onRemove: PropTypes.func
+    contacts: array.isRequired,
+    onRemove: func
 };
 
 Callto.propTypes = {
-    phone: PropTypes.string.isRequired,
-    children: PropTypes.node  
+    phone: string.isRequired,
+    children: node  
 };  
     
