@@ -1,6 +1,6 @@
 import {string, node} from 'prop-types'
 
-export const Message = (props) => {
+const Message = (props) => {
     const {
         color,
         children
