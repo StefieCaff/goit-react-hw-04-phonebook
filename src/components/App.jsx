@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { Notify } from 'notiflix';
 /* Local JS*/
-import { useLocalStorage } from "./LocalStorage/local-storage.js";
+import { useLocalStorage } from "../utils/LocalStorage/local-storage.js";
 /* Components */ 
 import { ContactForm } from './ContactForm/ContactForm.jsx'
 import { ContactList } from './ContactList/ContactList.jsx'
