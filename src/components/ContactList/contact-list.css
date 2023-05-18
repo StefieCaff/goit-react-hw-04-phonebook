@@ -1,0 +1,12 @@
+.call-to {
+    color: #C5A120;
+    background-color: #fffefa;
+    border-radius: 10px;
+    padding: 2px 7px;
+    transition: background-color 1s, color 1s;
+}
+
+.call-to:hover {
+    color: #fffefa;
+    background-color: #C5A120;
+}

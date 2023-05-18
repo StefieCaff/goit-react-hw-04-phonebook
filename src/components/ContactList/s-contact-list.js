@@ -40,23 +40,10 @@ const StyledName = styled.p` {
     margin-bottom: 5px;
 }`
 
-const StyledCallto = styled.a`
-   color: #C5A120;
-   background-color: #fffefa;
-   border-radius: 10px;
-   padding: 2px 5px;
-   transition: background-color 1s, color 1s;     
-      &:hover {
-         color: #fffefa;
-         background-color: #C5A120; 
-      }
-`;
-
 export {
    StyledListWrapper,
    StyledList,
    StyledItem,
    StyledInfo,
-   StyledCallto,
    StyledName
 };

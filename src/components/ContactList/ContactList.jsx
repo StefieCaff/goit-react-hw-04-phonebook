@@ -12,10 +12,9 @@ import {
     StyledList,
     StyledItem,
     StyledInfo,
-    StyledCallto,
-    StyledName
+    StyledName,
 } from './s-contact-list.js';
-
+import "./contact-list.css"
 
 export const ContactList = (props) => {
 
@@ -30,6 +29,10 @@ export const ContactList = (props) => {
             <StyledFlex>
                 <StyledTitle>Contact List</StyledTitle>
             </StyledFlex>
+            <div>
+              <span>Delete</span>
+                <span> Contact Info</span>
+            </div>
             <StyledListWrapper>
                 <StyledList>
                     {contacts.map(({ id, name, number }) => {
@@ -49,7 +52,7 @@ export const ContactList = (props) => {
                                 </StyledButton>
                                 <StyledInfo>
                                     <StyledName>{name}</StyledName>
-                                    <StyledCallto phone={number}>{number}</StyledCallto>
+                                    <CallTo phone={number}>{number}</CallTo>
                                 </StyledInfo>
                                 
                             </StyledItem>
@@ -61,8 +64,8 @@ export const ContactList = (props) => {
     );
 };
 
-const Callto = ({ phone, children }) => {
-  return <a href={`tel:${phone}`}>{children}</a>;
+const CallTo = ({ phone, children }) => {
+  return <a className="call-to" href={`tel:${phone}`}>{children}</a>;
 };
 
 ContactList.propTypes = {
@@ -70,7 +73,7 @@ ContactList.propTypes = {
     onRemove: func
 };
 
-Callto.propTypes = {
+CallTo.propTypes = {
     phone: string.isRequired,
     children: node  
 };  
